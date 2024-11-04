@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { messaging, onMessagelistener } from './utils/firebaseUtils'
-import { getMessaging, getToken } from "firebase/messaging";
+import { getToken } from "firebase/messaging";
 import Card from 'react-bootstrap/Card';
 import { toast, ToastContainer } from 'react-toastify';
 function App() {
@@ -9,7 +9,7 @@ function App() {
     try {
       const permission = await Notification.requestPermission()
       if (permission === 'granted') {
-        const token = await getToken(messaging, { vapidKey: 'BErC76EWfx7DtO7J3GJMuGCPZscbrjultuftliJt6zbMTF42EZzy4n-pIo9BIduIDnDv7mGzXaeHcR1pbMxH_ZY' })
+        const token = await getToken(messaging, { vapidKey: 'vapidCode' })
         console.log(token);
         setFcmToken(token)
 
@@ -35,7 +35,7 @@ function App() {
           <strong>{payload.notification.title}</strong>
           <strong>{payload.notification.body}</strong>
         </div>,
-        {position: "top-right"}
+        { position: "top-right" }
       )
       console.log(payload);
     })
